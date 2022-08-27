@@ -7,18 +7,22 @@ namespace StackBall.Controllers
     public class GridController : MonoBehaviour
     {
         public LineController line;
-        public Rigidbody rigidBody;
-
+        Rigidbody rigidBody;
+        
+        
         private void Start()
         {
             line = GetComponentInParent<LineController>();
-            line.explosionEvent.AddListener(this.Explosion);
+            line.explosionEvent.AddListener(Explosion);
             rigidBody = GetComponent<Rigidbody>();
+
+           
         }
 
         public void Breaking()
         {
             line.explosionEvent.Invoke();
+            
         }
 
         public void Explosion()
@@ -40,12 +44,15 @@ namespace StackBall.Controllers
                 explosionDirection = transform.position.x < 0f ? Vector3.left : Vector3.right;
             }
 
-            var forceDir = Vector3.one;
+            var forceDir = Vector3.zero ;
             forceDir.y = (line.force + forceRand) * 2f;
             forceDir.x = explosionDirection.x * ((line.force + forceRand) * .5f);
             forceDir.z = (line.force + forceRand) * -1f;
 
             rigidBody.AddForce(forceDir, ForceMode.Impulse);
+            
+        }
+
+        
         }
     }
-}
