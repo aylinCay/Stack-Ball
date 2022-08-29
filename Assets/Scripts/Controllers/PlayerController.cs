@@ -72,6 +72,7 @@ namespace StackBall
                 if (collisionInfo.gameObject.tag == "Broken")
                 {
                     collisionInfo.gameObject.GetComponent<GridController>().Breaking();
+                    GameManager.instance.AddScore(1);
                 }
                 else if (collisionInfo.gameObject.tag == "Inf")
                 {

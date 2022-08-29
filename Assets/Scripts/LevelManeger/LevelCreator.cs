@@ -15,6 +15,7 @@ namespace StackBall
         public bool isInital; //check start
         public int lineCount = 50; //how many will we create
         public Vector3 lastpos = Vector3.zero;
+        
         public void CreatorLevel()
         {
             var rot = 0f;
