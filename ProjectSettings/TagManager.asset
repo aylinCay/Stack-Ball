@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Broken
-  - Inf
   - Enemy
+  - UnBreakable
   layers:
   - Default
   - TransparentFX

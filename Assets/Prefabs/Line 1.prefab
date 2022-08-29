@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   line: {fileID: 0}
+  isBreakable: 1
 --- !u!1 &858567063658838156
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   line: {fileID: 0}
+  isBreakable: 1
 --- !u!1 &5818653907070318399
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +328,7 @@ GameObject:
   - component: {fileID: 516603218295888647}
   m_Layer: 0
   m_Name: Grid
-  m_TagString: Inf
+  m_TagString: UnBreakable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -438,6 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   line: {fileID: 0}
+  isBreakable: 0
 --- !u!1 &6208312453748758805
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,7 +457,7 @@ GameObject:
   - component: {fileID: 516603218324171112}
   m_Layer: 0
   m_Name: Grid
-  m_TagString: Inf
+  m_TagString: UnBreakable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -566,6 +569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   line: {fileID: 0}
+  isBreakable: 0
 --- !u!1 &8051175075155659916
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,6 +698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   line: {fileID: 0}
+  isBreakable: 1
 --- !u!1 &8570151116785749911
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,3 +827,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   line: {fileID: 0}
+  isBreakable: 1

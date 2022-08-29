@@ -1,88 +1,112 @@
 using StackBall.Controllers;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
+using Unity.VisualScripting;
+using UnityEngine;
 
 namespace StackBall
 {
-    
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using Unity.Mathematics;
-    using UnityEngine;
-    using UnityEngine.UIElements;
-    
     public class PlayerController : MonoBehaviour
     {
-        
-        private Rigidbody rigidBody;
-        private float speed = 7f;
-        private bool impact;
+        private float _speed = 7f;
+
+        [SerializeField] private Vector3 _force = new Vector3(0f, -100f, 0f);
+
+        private Rigidbody _rigidBody;
+        private bool _isOnInput;
+
         public ParticleSystem bomb;
         public GameObject panel;
-       
+
         private GridController gridCont;
-        
+
+        public bool isBoost;
+        public Collider coll;
+
         void Start()
         {
             gridCont = GetComponent<GridController>();
-            rigidBody = GetComponent<Rigidbody>();
-           
+            _rigidBody = GetComponent<Rigidbody>();
+            GameManager.instance.virtualCamera.Follow = transform;
+            GameManager.instance.virtualCamera.LookAt = transform;
         }
-    
+
         // Update is called once per frame
         void Update()
         {
-            if(Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
-                impact =true;
-            }
-    
-            if(Input.GetMouseButtonUp(0))
-            {
-                impact = false;
-
+                _isOnInput = true;
             }
 
-            bomb.transform.position = rigidBody.transform.position;
+            if (Input.GetMouseButtonUp(0))
+            {
+                _isOnInput = false;
+            }
         }
-    
+
         public void FixedUpdate()
         {
-            if(impact)
+            if (_isOnInput)
             {
-                rigidBody.velocity = new Vector3(0, -100 * Time.fixedDeltaTime * speed, 0);
+                if (!isBoost)
+                    _rigidBody.velocity = CalcForce();
+                else
+                {
+                    transform.position += CalcForce() * .1f;
+                }
+            }
+        }
+
+        public void PhysicOn(bool isOn)
+        {
+            if (isOn)
+            {
+                _rigidBody.constraints = RigidbodyConstraints.FreezeAll;
+            }
+            else
+            {
+                _rigidBody.constraints = (RigidbodyConstraints)122;
             }
         }
 
         public void OnCollisionEnter(Collision collision)
         {
-            if (!impact)
+            if (_isOnInput)
             {
-                rigidBody.velocity = new Vector3(0, 50 * Time.deltaTime * speed, 0);
+                if (collision.gameObject.TryGetComponent<GridController>(out var grid))
+                {
+                    if (grid.Breaking())
+                    {
+                        isBoost = true;
+
+                        GameManager.instance.AddScore(1);
+                    }
+                    else
+                    {
+                        isBoost = false;
+                        coll.isTrigger = false;
+                    }
+
+                    PhysicOn(isBoost);
+                }
+
+                return;
             }
-           
-           
+
+
+            _rigidBody.velocity = CalcForce() * -1f;
         }
 
-        public void OnCollisionStay(Collision collisionInfo)
-        { 
-            if(impact)
+        public Vector3 CalcForce() => _force * _speed * Time.deltaTime;
+
+
+        public void OnCollisionExit(Collision collision)
+        {
+            if (_isOnInput)
             {
-                if (collisionInfo.gameObject.tag == "Broken")
+                if (collision.gameObject.TryGetComponent<GridController>(out var grid))
                 {
-                    collisionInfo.gameObject.GetComponent<GridController>().Breaking();
-                    GameManager.instance.AddScore(1);
                 }
-                else if (collisionInfo.gameObject.tag == "Inf")
-                {
-                    Instantiate(bomb);
-                    Destroy(gameObject);
-                    panel.SetActive(true);
-                }
-                    
-            } 
-            
+            }
         }
     }
 }

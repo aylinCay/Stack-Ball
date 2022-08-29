@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,6 +23,8 @@ namespace StackBall
 
         [field: SerializeField] private GameObject playerPrefab { get; set; }
         [field: SerializeField] private GameObject playerPivot { get; set; }
+
+        public CinemachineVirtualCamera virtualCamera;
 
         private void Awake()
         {
