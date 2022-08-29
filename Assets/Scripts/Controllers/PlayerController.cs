@@ -1,12 +1,16 @@
 using StackBall.Controllers;
+using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 namespace StackBall
 {
+    
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using Unity.Mathematics;
     using UnityEngine;
+    using UnityEngine.UIElements;
     
     public class PlayerController : MonoBehaviour
     {
@@ -14,6 +18,8 @@ namespace StackBall
         private Rigidbody rigidBody;
         private float speed = 7f;
         private bool impact;
+        public ParticleSystem bomb;
+        public GameObject panel;
        
         private GridController gridCont;
         
@@ -37,7 +43,8 @@ namespace StackBall
                 impact = false;
 
             }
-           
+
+            bomb.transform.position = rigidBody.transform.position;
         }
     
         public void FixedUpdate()
@@ -65,8 +72,13 @@ namespace StackBall
                 if (collisionInfo.gameObject.tag == "Broken")
                 {
                     collisionInfo.gameObject.GetComponent<GridController>().Breaking();
-                } 
-                Debug.Log("Ateşlendi");
+                }
+                else if (collisionInfo.gameObject.tag == "Inf")
+                {
+                    Instantiate(bomb);
+                    Destroy(gameObject);
+                    panel.SetActive(true);
+                }
                     
             } 
             

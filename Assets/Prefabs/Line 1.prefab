@@ -113,8 +113,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.012171912, y: 0.013860812, z: 0.004999999}
-  m_Center: {x: 0.013813429, y: -0.000011843144, z: 0.0024999997}
+  m_Size: {x: 0.012171911, y: 0.011076065, z: 0.004999999}
+  m_Center: {x: 0.013813423, y: 0.0013805341, z: 0.0024999995}
 --- !u!114 &516603218645550543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,8 +295,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.010536704, y: 0.014004588, z: 0.004999999}
-  m_Center: {x: -0.01463103, y: 0.00037080018, z: 0.0024999997}
+  m_Size: {x: 0.010536702, y: 0.010717037, z: 0.0049999985}
+  m_Center: {x: -0.014631004, y: -0.0012729977, z: 0.0025}
 --- !u!114 &516603218645550541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 516603218295888647}
   m_Layer: 0
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: Inf
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -407,8 +407,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.013701772, y: 0.011881434, z: 0.004999999}
-  m_Center: {x: -0.006850886, y: 0.013371188, z: 0.0024999997}
+  m_Size: {x: 0.012998851, y: 0.0113426475, z: 0.0049999985}
+  m_Center: {x: -0.0074736155, y: 0.013640545, z: 0.0024999997}
 --- !u!54 &516603218295888641
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 516603218324171112}
   m_Layer: 0
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: Inf
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -535,8 +535,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.012354395, y: 0.0148585485, z: 0.004999999}
-  m_Center: {x: 0.0061771953, y: -0.011890791, z: 0.0025000013}
+  m_Size: {x: 0.010682443, y: 0.013961657, z: 0.0049999985}
+  m_Center: {x: 0.007013172, y: -0.015915722, z: 0.0025000018}
 --- !u!54 &516603218324171114
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -679,8 +679,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.0149500845, y: 0.01221927, z: 0.004999999}
-  m_Center: {x: 0.0074750423, y: 0.014420686, z: 0.0024999997}
+  m_Size: {x: 0.012758613, y: 0.012219273, z: 0.004999999}
+  m_Center: {x: 0.00742835, y: 0.014420684, z: 0.0024999997}
 --- !u!114 &516603218645550542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -807,8 +807,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.013456047, y: 0.013014395, z: 0.0049999994}
-  m_Center: {x: -0.0067280256, y: -0.013896994, z: 0.0025000018}
+  m_Size: {x: 0.011061597, y: 0.013014396, z: 0.004999999}
+  m_Center: {x: -0.007925244, y: -0.013896994, z: 0.0025000018}
 --- !u!114 &516603218331535262
 MonoBehaviour:
   m_ObjectHideFlags: 0

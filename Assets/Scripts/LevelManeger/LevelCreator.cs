@@ -9,7 +9,7 @@ namespace StackBall
 
     public class LevelCreator : MonoBehaviour
     {
-        public float rotateSpeed = .1f;
+        public float rotateSpeed = 1f;
         public GameObject linePrefab; //we defined the object
         public float lineOfsetY = .6f; //space between objects
         public bool isInital; //check start
