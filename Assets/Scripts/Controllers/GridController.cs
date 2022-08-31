@@ -7,8 +7,9 @@ namespace StackBall.Controllers
     public class GridController : MonoBehaviour
     {
         public LineController line;
-        public bool isBreakable;
+
         Rigidbody rigidBody;
+        private Collider coll;
 
 
         private void Start()
@@ -16,20 +17,20 @@ namespace StackBall.Controllers
             line = GetComponentInParent<LineController>();
             line.explosionEvent.AddListener(Explosion);
             rigidBody = GetComponent<Rigidbody>();
+            coll = GetComponent<Collider>();
         }
 
-        public bool Breaking()
+        public void Breaking()
         {
-            if (isBreakable)
-                line.explosionEvent.Invoke();
-            
-            return isBreakable;
+            Debug.Log("explosion");
+            line.explosionEvent.Invoke();
         }
 
         public void Explosion()
         {
             rigidBody.constraints = RigidbodyConstraints.None;
             rigidBody.useGravity = true;
+            coll.isTrigger = true;
 
             var forceRand = Random.Range(0, line.force);
 
@@ -37,7 +38,7 @@ namespace StackBall.Controllers
 
             if (transform.position.x == 0f)
             {
-                var randX = Random.Range(0, 10);
+                var randX = Random.Range(0, 6);
                 explosionDirection = randX < 5 ? Vector3.right : Vector3.left;
             }
             else

@@ -20,7 +20,7 @@ namespace StackBall
         public string scoreText
         {
             get => _scoreText.text;
-            set => _scoreText.text = "Score " + value;
+            set => _scoreText.text = "Score" + value;
         }
 
         private void Awake()

@@ -44,3 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf99f78752f08849aa888d4fb07815e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <gameScore>k__BackingField: 0
+  <onGameStartEvent>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <onGameExitEvent>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <onGameLoseEvent>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <onGameWinEvent>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <playerPrefab>k__BackingField: {fileID: 3689429250978158338, guid: d23c51fa01a8c3545ad89b94b789b967,
+    type: 3}
+  <playerPivot>k__BackingField: {fileID: 0}
+  virtualCamera: {fileID: 0}

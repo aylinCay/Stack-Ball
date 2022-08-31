@@ -11,11 +11,12 @@ namespace StackBall
     {
         public float rotateSpeed = 1f;
         public GameObject linePrefab; //we defined the object
-        public float lineOfsetY = .6f; //space between objects
+        public float lineOfsetY = .8f; //space between objects
         public bool isInital; //check start
         public int lineCount = 50; //how many will we create
         public Vector3 lastpos = Vector3.zero;
-        
+        public Material brokenMetarial;
+        public Material unBrokenMetarial;
         public void CreatorLevel()
         {
             var rot = 0f;
@@ -26,13 +27,33 @@ namespace StackBall
             for (int i = 0; i <= lineCount; i++)
             {
 
-                rot += 72; //we set increasing
+                rot += 3; //we set increasing
                 var pos = lastpos - (Vector3.up * lineOfsetY); //top-down position adjustment
                 var lineRot =linePrefab.transform.rotation= quaternion.Euler(Vector3.up * rot);//we set the rotation
                 var l= Instantiate(linePrefab, pos,lineRot); //we created the objects
+                var gridCount = l.transform.childCount;
+                for (int j = gridCount - 1; j >= 0; j--)
+                {
+                   var grid= l.transform.GetChild(j).gameObject;
+                   grid.tag = "Broken";
+                   grid.GetComponent<Renderer>().sharedMaterial = brokenMetarial;
+                }
 
-                
-               l.transform.SetParent(transform);
+                if (Random.Range(0, 100) < 15)
+                {
+                    int randChid = Random.Range(0, gridCount);
+                    for (int j = gridCount - 1; j >= 0; j--)
+                    {
+                        if (j == randChid)
+                        {
+                            continue;
+                        }
+                        var grid= l.transform.GetChild(j).gameObject;
+                        grid.tag = "UnBreakable";
+                        grid.GetComponent<Renderer>().sharedMaterial = unBrokenMetarial;
+                    }
+                }
+                l.transform.SetParent(transform);
                 lastpos = pos;
             }
 
@@ -49,6 +70,8 @@ namespace StackBall
         {
           transform.Rotate(Vector3.up* rotateSpeed*Time.deltaTime);
         }
+
+       
 
         
     }

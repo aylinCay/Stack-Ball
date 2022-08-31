@@ -35,12 +35,12 @@ namespace StackBall
         public void AddScore(float Value)
         {
             gameScore += Value;
-            UIManager.GlobalAccess.scoreText = gameScore.ToString();
+            UIManager.GlobalAccess.scoreText =gameScore.ToString();
         }
 
         public void SetScore(float Value)
         {
-            gameScore = Value;
+            gameScore += Value;
             UIManager.GlobalAccess.scoreText = gameScore.ToString();
         }
 

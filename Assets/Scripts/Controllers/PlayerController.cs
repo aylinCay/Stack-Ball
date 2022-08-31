@@ -1,51 +1,52 @@
+using System;
 using StackBall.Controllers;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace StackBall
 {
     public class PlayerController : MonoBehaviour
     {
         private float _speed = 7f;
-
         [SerializeField] private Vector3 _force = new Vector3(0f, -100f, 0f);
-
+        public GameManager game_manager;
         private Rigidbody _rigidBody;
-        private bool _isOnInput;
+        public bool _isOnInput;
 
         public ParticleSystem bomb;
         public GameObject panel;
-
-        private GridController gridCont;
-
+        public float value;
+        public GridController grid;
         public bool isBoost;
-        public Collider coll;
+       public bool isUnbreakable;
+       public int failCrash;
 
         void Start()
         {
-            gridCont = GetComponent<GridController>();
+            
+            grid = FindObjectOfType<GridController>().GetComponent<GridController>();
             _rigidBody = GetComponent<Rigidbody>();
             GameManager.instance.virtualCamera.Follow = transform;
             GameManager.instance.virtualCamera.LookAt = transform;
+          
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                _isOnInput = true;
-            }
+            _isOnInput = Input.GetButton("Fire1");
 
-            if (Input.GetMouseButtonUp(0))
+            if (failCrash >= 3)
             {
-                _isOnInput = false;
+               bomb.Play();
+               Destroy(gameObject, 1f);
             }
         }
 
         public void FixedUpdate()
         {
-            if (_isOnInput)
+            if (_isOnInput && !isUnbreakable)
             {
                 if (!isBoost)
                     _rigidBody.velocity = CalcForce();
@@ -68,45 +69,39 @@ namespace StackBall
             }
         }
 
-        public void OnCollisionEnter(Collision collision)
+        public void OnCollisionEnter(Collision other)
         {
             if (_isOnInput)
             {
-                if (collision.gameObject.TryGetComponent<GridController>(out var grid))
+                if (other.collider.gameObject.CompareTag("Broken"))
                 {
-                    if (grid.Breaking())
-                    {
-                        isBoost = true;
-
-                        GameManager.instance.AddScore(1);
-                    }
-                    else
-                    {
-                        isBoost = false;
-                        coll.isTrigger = false;
-                    }
-
-                    PhysicOn(isBoost);
+                    Debug.Log("burada");
+                    failCrash = 0;
+                    other.transform.GetComponent<GridController>().Breaking();
+                 GameManager.instance.AddScore(10);
+                 return;
                 }
-
-                return;
+                
             }
+            if (other.collider.gameObject.CompareTag("UnBreakable"))
+            {
+                if(_isOnInput) failCrash++;
+                _isOnInput = false;
+                isUnbreakable = true;
+            }
+            
+                    _rigidBody.velocity = CalcForce() * -1f;
+        }
 
-
-            _rigidBody.velocity = CalcForce() * -1f;
+        private void OnCollisionExit(Collision other)
+        {
+            if (other.collider.gameObject.CompareTag("UnBreakable"))
+            {
+                isUnbreakable = false;
+               
+            }
         }
 
         public Vector3 CalcForce() => _force * _speed * Time.deltaTime;
-
-
-        public void OnCollisionExit(Collision collision)
-        {
-            if (_isOnInput)
-            {
-                if (collision.gameObject.TryGetComponent<GridController>(out var grid))
-                {
-                }
-            }
-        }
     }
 }

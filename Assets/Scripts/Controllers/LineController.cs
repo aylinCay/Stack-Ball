@@ -8,7 +8,7 @@ namespace StackBall.Controllers
 {
     public class LineController : MonoBehaviour
     {
-       
+        
         public float force;
         public UnityEvent explosionEvent = new UnityEvent();
         
