@@ -44,6 +44,7 @@ namespace StackBall
                bomb.Play();
                Destroy(gameObject, 1f);
               GameManager.instance.OnGameLose();
+              GameManager.instance.AddConclusion("GAME OVER");
             }
         }
 
@@ -92,6 +93,13 @@ namespace StackBall
                 _isOnInput = false;
                 isUnbreakable = true;
             }
+
+            if (other.collider.gameObject.CompareTag("Finish"))
+            {
+                 GameManager.instance.OnGameWin();
+                GameManager.instance.AddConclusion("WİN");
+            }
+            
             
                     _rigidBody.velocity = CalcForce() * -1f;
         }

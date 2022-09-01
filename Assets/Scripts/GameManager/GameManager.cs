@@ -10,7 +10,7 @@ namespace StackBall
         public static GameManager instance;
 
         [field: SerializeField] public float gameScore { get; private set; }
-
+[field: SerializeField] public string conclusion { get; private set; }
         [field: SerializeField] public UnityEvent onGameStartEvent { get; private set; }
 
         [field: SerializeField] public UnityEvent onGameExitEvent { get; private set; }
@@ -31,6 +31,17 @@ namespace StackBall
             CreateInstance();
         }
 
+        public void AddConclusion(string valueText)
+        {
+            conclusion = valueText;
+             UIManager.GlobalAccess.conclusionText = conclusion;
+        }
+
+        public void SetConclusion(string valueText)
+        {
+            conclusion = valueText;
+            UIManager.GlobalAccess.conclusionText = conclusion;
+        }
 
         public void AddScore(float Value)
         {

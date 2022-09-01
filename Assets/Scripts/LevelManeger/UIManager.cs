@@ -2,19 +2,21 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-
+using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 namespace StackBall
 {
     public class UIManager : MonoBehaviour
     {
+        
         public static UIManager GlobalAccess { get; set; }
 
         [field: SerializeField] private GameObject gamePanel;
-        [field: SerializeField] private GameObject failPanel;
+        [field: SerializeField] private GameObject resultPanel;
 
         [SerializeField] private TextMeshProUGUI _scoreText;
 
-        
+        [SerializeField] private TextMeshProUGUI _conclusionText;
 
         public void Start()
         {
@@ -32,17 +34,22 @@ namespace StackBall
             set => _scoreText.text = "Score" + value;
         }
 
+        public string conclusionText
+        {
+            get => _conclusionText.text;
+            set => _conclusionText.text = value;
+        }
+
         private void Awake()
         {
             GlobalAccess = this;
-            
 
         }
 
-        public void OnFailPanel(bool isOn)
+        public void OnResultPanel(bool isOn)
         {
             
-            failPanel.SetActive(isOn);
+            resultPanel.SetActive(isOn);
 
         }
 
@@ -50,6 +57,12 @@ namespace StackBall
         {
             Application.Quit();
             Debug.Log("Çalıştı");
+        }
+
+        public void OnReplay()
+        {
+            SceneManager.LoadScene(0);
+            
         }
 
       
