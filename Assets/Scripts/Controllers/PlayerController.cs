@@ -10,14 +10,15 @@ namespace StackBall
     {
         private float _speed = 7f;
         [SerializeField] private Vector3 _force = new Vector3(0f, -100f, 0f);
-        public GameManager game_manager;
+       
         private Rigidbody _rigidBody;
         public bool _isOnInput;
+       
 
         public ParticleSystem bomb;
-        public GameObject panel;
-        public float value;
-        public GridController grid;
+        private UIManager uıManager;
+        
+        
         public bool isBoost;
        public bool isUnbreakable;
        public int failCrash;
@@ -25,11 +26,12 @@ namespace StackBall
         void Start()
         {
             
-            grid = FindObjectOfType<GridController>().GetComponent<GridController>();
+           
             _rigidBody = GetComponent<Rigidbody>();
             GameManager.instance.virtualCamera.Follow = transform;
             GameManager.instance.virtualCamera.LookAt = transform;
-          
+            uıManager = GetComponent<UIManager>();
+
         }
 
         // Update is called once per frame
@@ -41,6 +43,7 @@ namespace StackBall
             {
                bomb.Play();
                Destroy(gameObject, 1f);
+              GameManager.instance.OnGameLose();
             }
         }
 
