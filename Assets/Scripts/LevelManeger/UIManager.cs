@@ -16,7 +16,7 @@ namespace StackBall
 
         [SerializeField] private TextMeshProUGUI _scoreText;
 
-        [SerializeField] private TextMeshProUGUI _conclusionText;
+       
 
         public void Start()
         {
@@ -34,11 +34,7 @@ namespace StackBall
             set => _scoreText.text = "Score" + value;
         }
 
-        public string conclusionText
-        {
-            get => _conclusionText.text;
-            set => _conclusionText.text = value;
-        }
+      
 
         private void Awake()
         {
@@ -53,11 +49,7 @@ namespace StackBall
 
         }
 
-        public void GameExit()
-        {
-            Application.Quit();
-            Debug.Log("Çalıştı");
-        }
+       
 
         public void OnReplay()
         {

@@ -34,14 +34,10 @@ namespace StackBall
         public void AddConclusion(string valueText)
         {
             conclusion = valueText;
-             UIManager.GlobalAccess.conclusionText = conclusion;
+             
         }
 
-        public void SetConclusion(string valueText)
-        {
-            conclusion = valueText;
-            UIManager.GlobalAccess.conclusionText = conclusion;
-        }
+       
 
         public void AddScore(float Value)
         {
@@ -59,11 +55,7 @@ namespace StackBall
         {
             onGameStartEvent.Invoke();
         }
-
-        public void OnGameExit()
-        {
-            onGameExitEvent.Invoke();
-        }
+        
 
         public void OnGameLose()
         {
