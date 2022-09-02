@@ -1,8 +1,10 @@
 using System;
 using StackBall.Controllers;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 
 namespace StackBall
 {
@@ -13,10 +15,10 @@ namespace StackBall
        
         private Rigidbody _rigidBody;
         public bool _isOnInput;
-       
+        [FormerlySerializedAs("slashEffect")] public GameObject splashEffect;
 
         public ParticleSystem bomb;
-        private UIManager uıManager;
+       
         
         
         public bool isBoost;
@@ -30,7 +32,7 @@ namespace StackBall
             _rigidBody = GetComponent<Rigidbody>();
             GameManager.instance.virtualCamera.Follow = transform;
             GameManager.instance.virtualCamera.LookAt = transform;
-            uıManager = GetComponent<UIManager>();
+           
 
         }
 
@@ -75,15 +77,22 @@ namespace StackBall
 
         public void OnCollisionEnter(Collision other)
         {
+            
+            GameObject splash=  Instantiate(splashEffect, transform.position,Quaternion.Euler(new Vector3(90f,0f,0f)));
+            splash.transform.position = other.contacts[0].point + Vector3.up * .1f;
+            splash.transform.SetParent(other.gameObject.transform);
             if (_isOnInput)
             {
+                
                 if (other.collider.gameObject.CompareTag("Broken"))
                 {
                     Debug.Log("burada");
                     failCrash = 0;
                     other.transform.GetComponent<GridController>().Breaking();
+                    
                  GameManager.instance.AddScore(10);
                  return;
+                 
                 }
                 
             }
@@ -92,6 +101,7 @@ namespace StackBall
                 if(_isOnInput) failCrash++;
                 _isOnInput = false;
                 isUnbreakable = true;
+              
             }
 
             if (other.collider.gameObject.CompareTag("Finish"))

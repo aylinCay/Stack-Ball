@@ -23,7 +23,10 @@ namespace StackBall.Controllers
         public void Breaking()
         {
             Debug.Log("explosion");
+            CameraController.Instance.CameraShake(5f,0.1f);
             line.explosionEvent.Invoke();
+            
+            //Handheld.Vibrate();
         }
 
         public void Explosion()
@@ -36,21 +39,16 @@ namespace StackBall.Controllers
 
             var explosionDirection = Vector3.right;
 
-            if (transform.position.x == 0f)
-            {
-                var randX = Random.Range(0, 6);
-                explosionDirection = randX < 5 ? Vector3.right : Vector3.left;
-            }
-            else
-            {
-                explosionDirection = transform.position.x < 0f ? Vector3.left : Vector3.right;
-            }
+         
+                var randX = Random.Range(-6, 6);
+                explosionDirection = Vector3.right * randX; 
+           
 
             var forceDir = Vector3.zero;
             forceDir.y = (line.force + forceRand) * 2f;
             forceDir.x = explosionDirection.x * ((line.force + forceRand) * .5f);
             forceDir.z = (line.force + forceRand) * -1f;
-
+            transform.SetParent(null);
             rigidBody.AddForce(forceDir, ForceMode.Impulse);
         }
     }
