@@ -12,7 +12,7 @@ namespace StackBall
     {
         private float _speed = 7f;
         [SerializeField] private Vector3 _force = new Vector3(0f, -100f, 0f);
-       
+        public AudioSource bounce;
         private Rigidbody _rigidBody;
         public bool _isOnInput;
         [FormerlySerializedAs("slashEffect")] public GameObject splashEffect;
@@ -30,6 +30,7 @@ namespace StackBall
             
            
             _rigidBody = GetComponent<Rigidbody>();
+            bounce = GetComponent<AudioSource>();
             GameManager.instance.virtualCamera.Follow = transform;
             GameManager.instance.virtualCamera.LookAt = transform;
            
@@ -81,9 +82,10 @@ namespace StackBall
             GameObject splash=  Instantiate(splashEffect, transform.position,Quaternion.Euler(new Vector3(90f,0f,0f)));
             splash.transform.position = other.contacts[0].point + Vector3.up * .1f;
             splash.transform.SetParent(other.gameObject.transform);
+            bounce.Play();
             if (_isOnInput)
             {
-                
+               
                 if (other.collider.gameObject.CompareTag("Broken"))
                 {
                     Debug.Log("burada");
@@ -101,7 +103,7 @@ namespace StackBall
                 if(_isOnInput) failCrash++;
                 _isOnInput = false;
                 isUnbreakable = true;
-              
+                
             }
 
             if (other.collider.gameObject.CompareTag("Finish"))

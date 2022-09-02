@@ -24,9 +24,8 @@ namespace StackBall.Controllers
         {
             Debug.Log("explosion");
             CameraController.Instance.CameraShake(5f,0.1f);
-            line.explosionEvent.Invoke();
-            
-            //Handheld.Vibrate();
+            Handheld.Vibrate();
+            line.explosionEvent.Invoke(); 
         }
 
         public void Explosion()
